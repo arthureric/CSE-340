@@ -1,4 +1,11 @@
-const pool = require("../database/") // Importing the database pool
+const pool = require("../database/")
+
+/* ***************************
+ *  Get all classification data
+ * ************************** */
+async function getClassifications(){
+  return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")
+}
 
 /* ***************************
  *  Get all inventory items and classification_name by classification_id
@@ -19,10 +26,45 @@ async function getInventoryByClassificationId(classification_id) {
 }
 
 /* ***************************
- *  Get all classification data
- * ************************** */
-async function getClassifications(){
-  return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")
+* Function to get inventory item by ID
+* ************************** */
+async function getInventoryItemById(invId) {
+  try {
+    const query = "SELECT * FROM public.inventory WHERE inv_id = $1";
+    const result = await pool.query(query, [invId]);
+    return result.rows[0];
+  } catch (error) {
+    console.error("Error fetching inventory item by ID:", error);
+    throw error;
+  }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId};
+/* ***************************
+* add a new classification to the database
+* ************************** */
+async function addClassification(classification_name) {
+  try {
+    const query = "INSERT INTO classification (classification_name) VALUES ($1)";
+    await pool.query(query, [classification_name]);
+  } catch (error) {
+    console.error("Error adding classification:", error);
+    throw error;
+  }
+}
+
+/* ***************************
+* add new inventory to the database
+* ************************** */
+async function addInventory(classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color) {
+  try {
+    const query = 'INSERT INTO inventory (classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)';
+    await pool.query(query, [classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color]);
+  } catch (error) {
+    console.error("Error adding vehicle:", error);
+    throw error;
+  }
+};
+
+
+
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryItemById, addClassification, addInventory};
