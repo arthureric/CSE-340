@@ -190,6 +190,93 @@
   }
 }
 
+/* login/registration page */
+
+.form-container {
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  text-align: center;
+  font-size: .85rem;
+}
+
+.form-container p{
+  margin: 8px auto;
+}
+
+.form-container label{
+  font-weight: bold;
+}
+
+.form-group {
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: .85rem;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.form-group input:focus:invalid, textarea:focus:invalid {
+  background-color: rgb(255, 188, 188);
+  background-image: url("/images/site/invalid.png");
+  background-size: 16px 16px;
+  background-position: right top;
+  background-repeat: no-repeat;  
+}
+
+.form-group input:required:valid, textarea:required.valid {
+  background-color: rgb(255, 255, 255);
+  background-image: url("/images/site/valid.png");
+  background-size: 16px 16px;
+  background-position: right top;
+  background-repeat: no-repeat;
+}
+
+.form-button {
+  width: 50%;
+  padding: 5px;
+  margin-top: 10px;
+  background-color: #c5c5c5;
+  color: rgb(219, 152, 152);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#togglePassword {
+  padding: 5px;
+  margin-top: 5px;
+  background-color: #c5c5c5;
+  color: rgb(0, 0, 0);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: .75rem;
+  text-transform: uppercase; 
+}
+
 #error404 img{
   width: 100%;
 }
