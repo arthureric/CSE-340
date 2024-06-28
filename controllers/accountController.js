@@ -25,17 +25,13 @@ async function buildRegister(req, res, next) {
     })
   };
 
+
 /* ****************************************
-*  Process for Registration
+*  Process Registration
 * *************************************** */
 async function registerAccount(req, res) {
   let nav = await utilities.getNav()
-  const { 
-    account_firstname, 
-    account_lastname, 
-    account_email, 
-    account_password 
-  } = req.body
+  const { account_firstname, account_lastname, account_email, account_password } = req.body
 
   const regResult = await accountModel.registerAccount(
     account_firstname,
@@ -58,7 +54,6 @@ async function registerAccount(req, res) {
     res.status(501).render("account/register", {
       title: "Registration",
       nav,
-      errors: null,
     })
   }
 }
