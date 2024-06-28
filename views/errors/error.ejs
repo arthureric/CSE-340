@@ -1,6 +1,11 @@
 <% if (title){ %>
-    <h1><%= title %></h1>
-<% } else{ 
-    res.redirect("/") }%>
+    <h1> class="error-title"><%= title %></h1>
+<% } %>
+<div id="error404">
+    <picture>
+        <source media="(min-width: 768)" srcset="/images/errors/error1.jpeg">
+        <img src="/images/errors/error1.jpeg" alt="error404">
+    </picture>
+</div>
 
-<%- message %>
+<p class="error-message"> <%- message %> </p>
