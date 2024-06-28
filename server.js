@@ -59,9 +59,13 @@ app.use(static)
 app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory routes
 app.use("/inv", utilities.handleErrors(inventoryRoute))
+// Intentional Error route
+app.use('/account', utilities.handleErrors(accountRoute))
+// Intentional Error route
+app.use('/error', utilities.handleErrors(accountRoute))
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
-  next({status: 404, message: 'Sorry, we appear to have lost that page.'})
+  next({status: 404, message: '<h1>Site is Broken!</h1><p>Sorry, we appear to have lost that page.(404)</p>'})
 })
 
 /* ***********************
@@ -71,7 +75,16 @@ app.use(async (req, res, next) => {
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
+  console.error(err.stack); // Print debugging trace for stack
+  let message = '';
+  if(err.status == 404) {
+    message = err.message
+    res.status(404).render("errors/error"), {
+      title: '404 - Not Found',
+      message,
+      nav
+  }
+  }else {message = 'Oh no! There was a crash. Maybe try a different route?'}
   res.render("errors/error", {
     title: err.status || 'Server Error',
     message,
