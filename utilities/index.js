@@ -6,6 +6,7 @@ const Util = {}
  ************************** */
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications()
+  console.log(data)
   let list = "<ul>"
   list += '<li><a href="/" title="Home page">Home</a></li>'
   data.rows.forEach((row) => {
@@ -58,42 +59,36 @@ Util.buildClassificationGrid = async function(data){
 }
 
 /* **************************************
-* Vehicle details into HTML
+* Car details into HTML
 * ************************************ */
-Util.formatInventoryDetail = function(vehicle) {
-  let htmlContent = `<h1>${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}</h1>`; 
- htmlContent += `<div class='vehicle-detail'>`;
- htmlContent += `<img src="${vehicle.inv_image}" alt="${vehicle.inv_make} ${vehicle.inv_model} image on CSE Motors" class="center">`;
- htmlContent += `<div class='details'>`;
- htmlContent += `<h2 class="center">${vehicle.inv_make} ${vehicle.inv_model} Details</h2>`;
- htmlContent += `<p class="odd"><strong>Price:</strong> $${new Intl.NumberFormat('en-US').format(vehicle.inv_price)}</p>`;
- htmlContent += `<p class="even"><strong>Description:</strong> ${vehicle.inv_description}</p>`;
- htmlContent += `<p class="odd"><strong>Color:</strong> ${vehicle.inv_color}</p>`;
- htmlContent += `<p class="even"><strong>Miles:</strong> ${new Intl.NumberFormat('en-US').format(vehicle.inv_miles)}</p>`;
- htmlContent += `<p class="odd"><strong>Year:</strong> ${vehicle.inv_year}</p>`;
- htmlContent += `</div>`;
- htmlContent += `</div>`;
- return htmlContent;
-};
-
-Util.buildClassificationList = async function (classification_id = null) {
-  try {
-      let data = await invModel.getClassifications();
-      let classificationList = '<select name="classification_id" id="classificationList" required>';
-      classificationList += "<option value=''>Choose a Classification</option>";
-      data.rows.forEach((row) => {
-          classificationList += '<option value="' + row.classification_id + '"';
-          if (classification_id != null && row.classification_id == classification_id) {
-              classificationList += " selected ";
-          }
-          classificationList += ">" + row.classification_name + "</option>";
-      });
-      classificationList += "</select>";
-      return classificationList;
-  } catch (error) {
-      throw error;
+Util.buildCarGrid = async function(data){
+  let grid
+  if (data.length > 0) {
+      car_data = data[0]
+      grid = '<div id="ind-car">'
+      grid+= '<img src="' + car_data.inv_image +
+      '" alt="Image of '+ car_data.inv_make + ' ' + car_data.inv_model
+      +' On CSE Motors" />'
+      grid+= '<div class="description">'
+      grid+= '<h2>' + car_data.inv_make + ' ' + car_data.inv_model + ' Details' + '</h2>'
+      grid+= '<h2>' + 'Price: ' + '<span>$' 
+      + new Intl.NumberFormat('en-US').format(car_data.inv_price) + '</span>' +'</h2>'
+      grid+= '<p>'
+      grid+= '<span>Description: ' + '</span>' + car_data.inv_description
+      grid+= '</p>'
+      grid+= '<p>'
+      grid+= '<span>Color: ' + '</span>' + car_data.inv_color
+      grid+= '</p>'
+      grid+= '<p>'
+      grid+= '<span>Miles: ' + '</span>' + car_data.inv_miles
+      grid+= '</p>'
+      grid+= '</div>'
+      grid+= '</div>'   
+  } else{
+      grid+= '<p class="notice">Sorry, there is not vehicles of this model' + '</p>'
   }
-};
+  return grid
+}
 
 /* ****************************************
  * Middleware For Handling Errors
