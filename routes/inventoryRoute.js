@@ -8,6 +8,6 @@ const utilities = require("../utilities")
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId))
 
 // Route to build car view
-router.get("/detail/:invId", utilities.handleErrors(invController.buildByInventoryId))
+router.get("/details/:invId", utilities.handleErrors(invController.buildByInventoryId))
 
 module.exports = router; // Exporting the router for use in other modules
