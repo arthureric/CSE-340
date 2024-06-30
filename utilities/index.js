@@ -58,38 +58,6 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
-/* **************************************
-* Car details into HTML
-* ************************************ */
-Util.buildCarGrid = async function(data){
-  let grid
-  if (data.length > 0) {
-      car_data = data[0]
-      grid = '<div id="ind-car">'
-      grid+= '<img src="' + car_data.inv_image +
-      '" alt="Image of '+ car_data.inv_make + ' ' + car_data.inv_model
-      +' On CSE Motors" />'
-      grid+= '<div class="description">'
-      grid+= '<h2>' + car_data.inv_make + ' ' + car_data.inv_model + ' Details' + '</h2>'
-      grid+= '<h2>' + 'Price: ' + '<span>$' 
-      + new Intl.NumberFormat('en-US').format(car_data.inv_price) + '</span>' +'</h2>'
-      grid+= '<p>'
-      grid+= '<span>Description: ' + '</span>' + car_data.inv_description
-      grid+= '</p>'
-      grid+= '<p>'
-      grid+= '<span>Color: ' + '</span>' + car_data.inv_color
-      grid+= '</p>'
-      grid+= '<p>'
-      grid+= '<span>Miles: ' + '</span>' + car_data.inv_miles
-      grid+= '</p>'
-      grid+= '</div>'
-      grid+= '</div>'   
-  } else{
-      grid+= '<p class="notice">Sorry, there is not vehicles of this model' + '</p>'
-  }
-  return grid
-}
-
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
