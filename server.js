@@ -12,7 +12,7 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
-const utilities = require("./utilities/index")
+const utilities = require("./utilities/")
 const errorRoute = require("./routes/errorRoute")
 const errorHandler = require("./routes/errorRoute")
 const session = require("express-session")
@@ -56,7 +56,7 @@ app.set("layout", "./layouts/layout") // not at views root
  *************************/
 app.use(static)
 // Index route
-app.get("/", baseController.buildHome)
+app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory routes
 app.use("/inv", inventoryRoute)
 // Intentional Error route
@@ -75,19 +75,10 @@ app.use(async (req, res, next) => {
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  console.error(err.stack); // Print debugging trace for stack
-  let message = '';
-  if(err.status == 404) {
-    message = err.message
-    res.status(404).render("errors/error"), {
-      title: '404 - Not Found',
-      message,
-      nav
-  }
-  }else {message = 'Oh no! There was a crash. Maybe try a different route?'}
+  if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
   res.render("errors/error", {
     title: err.status || 'Server Error',
-    message,
+    message: err.message,
     nav
   })
 })
