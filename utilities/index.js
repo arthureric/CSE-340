@@ -58,6 +58,29 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+/*************************************
+ * Populates the view with data from an individual item by id.
+* ************************************ */
+Util.getItem = async function (req, res, id) {
+  let data = await invModel.getDetails(id)
+  let list = '<ul class="inv-detail-view">'
+  data.rows.forEach((row) => {
+      list += '<li class="item-display-grid">'
+      list += '<img class="inv-right" src="' + row.inv_image + '" alt="Image of ' + row.inv_make + ' ' + row.inv_model + '"/>'
+      list += '<h2 class="inv-right">' + row.inv_year + ' ' + row.inv_make + ' ' + row.inv_model + '</h2>'
+      list += '<p class="inv-right"><b>Description:</b> ' + row.inv_description + '</p>'
+      list += '<p class="inv-right"><b>Color:</b> ' + row.inv_color + '</p>'
+      list += '<p class="inv-right"><b>Mileage:</b> ' + row.inv_miles + '</p>'
+      list += '<p class="inv-right"><b>Price:</b> $' + row.inv_price + '</p>'
+      list += '<a class="inv-right" href="/contactus">'
+      list += '<p class="inv-right" id="buy-car">Buy Now</p>'
+      list += "</a>"
+      list += "</li>"
+  })
+  list += "</ul>"
+  return list
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
