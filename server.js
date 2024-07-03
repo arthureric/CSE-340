@@ -19,12 +19,11 @@ const session = require("express-session")
 const pool = require('./database/')
 const accountRoute =("./routes/accountRoute.js")
 const bodyParser = require("body-parser")
-const session = require("express-session")
 
 /* ***********************
  * Middleware
  * ************************/
- app.use(session({
+app.use(session({
   store: new (require('connect-pg-simple')(session))({
     createTableIfMissing: true,
     pool,
