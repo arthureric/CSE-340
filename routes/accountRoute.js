@@ -1,6 +1,6 @@
 const regValidate = require('../utilities/account-validation')
-const express = require("express")
-const router = new express.Router() 
+const express = require('express');
+const router = express.Router();
 const accountController = require("../controllers/accountController")
 const utilities = require("../utilities/index");
 

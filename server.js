@@ -17,7 +17,7 @@ const errorRoute = require("./routes/errorRoute")
 const errorHandler = require("./routes/errorRoute")
 const session = require("express-session")
 const pool = require('./database/')
-const accountRoute =("./routes/accountRoute.js")
+const accountRoute =("./routes/accountRoute")
 const bodyParser = require("body-parser")
 
 /* ***********************
