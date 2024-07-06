@@ -1,23 +1,18 @@
 // Needed Resources 
-const logValidate = require('../utilities/login-validation')
-const regValidate = require('../utilities/registration-validation')
 const express = require("express") // Brings express into scope.
 const router = new express.Router() // Using express we create a new router object.
 const accountController = require("../controllers/accountController") // Brings the invController into scope.
-const Util = require('../utilities/');
+const Util = require('../utilities/')
+const logValidate = require('../utilities/login-validation')
+const regValidate = require('../utilities/registration-validation')
 
 /* ***************************
- *  GET
+ *  Build Account
  * ************************** */
-// Deliver Default Account View
-router.get(
-  "/", 
-  Util.checkLogin, 
-  Util.handleErrors(accountController.buildAccountManagementHomeView)
-);
-
 // Deliver Login View
-router.get("/login", accountController.buildLoginView);
+router.get("/login", utilities.handleErrors(accountController.buildLogin))
+// Route to build Default Account View
+router.get("/register", utilities.handleErrors(accountController.buildRegister))
 
 // Deliver Edit Account View
 router.get(
@@ -32,40 +27,22 @@ router.get("/register", accountController.buildRegisterView);
 router.get("/edit/:account_id", accountController.buildEditAccountView);
 
 
-
-/* ***************************
- *  POST
- * ************************** */
-// Process the login data
-router.post(
-  "/login",
-  logValidate.loginRules(),
-  logValidate.checkLoginData,
-  Util.handleErrors(accountController.processAccountLogin)
-)
-
 // Process the registration data
 router.post(
   "/register",
-  regValidate.regRules(),
+  regValidate.registationRules(),
   regValidate.checkRegData,
-  Util.handleErrors(accountController.registerNewAccount)
+  utilities.handleErrors(accountController.registerAccount)
 )
 
-// Process the account update
+// Process the login attempt
 router.post(
-  "/update-account",
-  logValidate.updateAccountRules(),
-  logValidate.checkEditAccountData,
-  Util.handleErrors(accountController.processAccountUpdate)
-)
-
-// Process the account password change
-router.post(
-  "/change-password",
-  logValidate.changePasswordRules(),
-  logValidate.checkEditAccountData,
-  Util.handleErrors(accountController.processAccountPasswordUpdate)
+  "/login",
+  regValidate.LoginRules(),
+  regValidate.checkLoginData,
+  (req, res) => {
+    res.status(200).send('login process')
+  }
 )
 
 module.exports = router; // exports the router objects to be used elsewhere in the project.

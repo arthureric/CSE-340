@@ -1,13 +1,13 @@
-<!--Displaying providioned title or redirecting response to default index route-->
-<%if (title) {%>
-    <h1><%=title%></h1>
-<%} else{
-    res.redirect('/')
-}%>
+<!--This will show three distint sections:
+ A Content heading, 
+ a message and the Inventory Items Display. -->
 
-<!--Displaying messages in the view-->
-<%# messages() %>
+ <% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+  
+  <%# messages() %>
 
-<!--Displaying Inventory Items-->
-<%- inventoryDetail %>
-
+  <%- grid %>
