@@ -1,10 +1,12 @@
-const pool = require("../database/")
+const pool = require("../database/");
 
 /* ***************************
  *  Get all classification data
  * ************************** */
-async function getClassifications(){
-  return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")
+async function getClassifications() {
+  return await pool.query(
+    "SELECT * FROM public.classification ORDER BY classification_name"
+  );
 }
 
 /* ***************************
@@ -18,33 +20,33 @@ async function getInventoryByClassificationId(classification_id) {
       ON i.classification_id = c.classification_id 
       WHERE i.classification_id = $1`,
       [classification_id]
-    )
-    return data.rows
+    );
+    return data.rows;
   } catch (error) {
-    console.error("getclassificationsbyid error " + error)
+    console.error("getclassificationsbyid error " + error);
   }
 }
 
 /* **************************************
-* Get all the information of the car requested
-* ************************************ */
+ * Get all the information of the car requested
+ * ************************************ */
 
-async function getInventoryByInventoryId(inv_id){
+async function getVehicleDetails(inv_id) {
   try {
-      const data = await pool.query(
-          `SELECT * FROM public.inventory AS i
+    const data = await pool.query(
+      `SELECT * FROM public.inventory AS i
           WHERE i.inv_id = $1`,
-          [inv_id]
-      )
-      return data.rows;
+      [inv_id]
+    );
+    return data.rows;
   } catch (error) {
-      console.error("getinventorybyid error " + error)
+    console.error("getinventorybyid error " + error);
   }
 }
 
 /* ***************************
-* Function to get inventory item by ID
-* ************************** */
+ * Function to get inventory item by ID
+ * ************************** */
 async function getInventoryItemById(invId) {
   try {
     const query = "SELECT * FROM public.inventory WHERE inv_id = $1";
@@ -56,4 +58,4 @@ async function getInventoryItemById(invId) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryItemById};
+module.exports = { getClassifications, getInventoryByClassificationId, getVehicleDetails };

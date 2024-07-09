@@ -54,13 +54,13 @@ app.set("layout", "./layouts/layout") // not at views root
 /* ***********************
  * Routes
  *************************/
-app.use(static)
+app.use(require("./routes/static"));
 // Index route
 app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory routes
-app.use("/inv", utilities.handleErrors(inventoryRoute))
+app.use("/inv", require("./routes/inventoryRoute"));
 // Intentional Error route
-app.use('/account', utilities.handleErrors(accountRoute))
+app.use ("/account", require("./routes/accountRoute"))
 // Intentional Error route
 app.use('/error', utilities.handleErrors(accountRoute))
 // File Not Found Route - must be last route in list

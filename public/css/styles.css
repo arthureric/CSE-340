@@ -339,6 +339,79 @@
   font-size: 1.3rem;
 }
 
+/* styles.css */
+.veh-display {
+  /* Add styles for the entire vehicle display container */
+  /* For example: */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* Two equal-width sub-columns */
+
+}
+
+.vehicle-detail-left {
+  display: grid;
+
+}
+
+.vehicle-name {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* Two equal-width sub-columns */
+}
+
+.vehicle-mp {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* Two equal-width sub-columns */
+}
+
+.vehicle-detail {
+  /* Add styles for each vehicle detail section */
+  /* For example: */
+  border: 1px solid #ddd;
+
+}
+
+.vehicle-image {
+  /* Add styles for the vehicle image */
+  /* For example: */
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+}
+
+.vehicle-info {
+  /* Add styles for the vehicle information section */
+  /* For example: */
+  font-size: 16px;
+  color: #333;
+}
+
+
+.vehicle-buttons {
+  display: block;
+  background-color: #333;
+  color: white;
+}
+
+.button:hover {
+  background-color: rgb(128, 98, 0);
+}
+
+/* Mobile View ***************/
+#menu {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: .5rem .75rem;
+  color: rgba(27, 21, 21, 0.3);
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
 /**** smaller screens ****/
 @media (max-width: 768px) {
   nav li {

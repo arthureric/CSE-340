@@ -127,4 +127,4 @@ invCont.manageInventory = async function (req, res) {
 
 
 
-module.exports = invCont
+module.exports = invCont;

@@ -1,7 +1,16 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const errorController = require("../controllers/errorController");
-// Route for an intentional error
-router.get("/start-error", errorController.startError);
+const accountController = require('../controllers/accountController');
+const utilities = require('../utilities/');
+
+
+/* ****************************************
+*  Deliver login view
+* *************************************** */
+router.get("/login", utilities.handleErrors(accountController.buildLogin))
+
+
+router.get("/register", utilities.handleErrors(accountController.buildRegister))
+
 
 module.exports = router;
