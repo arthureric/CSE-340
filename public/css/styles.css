@@ -451,6 +451,10 @@ border-radius: 0;
   background-color: lightcoral;
 }
 
+#classificationList {
+  width: auto;
+  margin: 1rem;
+}
 
 .account-label input{
   border: 1px solid #2c3e50;
@@ -469,6 +473,7 @@ border-radius: 0;
   text-align: center;
   display: block;
   margin: 0 auto;
+  margin-top: 1rem;
 }
 .login-form button:hover, .account-form button:hover, .management-form button:hover {
   background-color: #bdc3c7;
@@ -478,6 +483,7 @@ border-radius: 0;
   background-color: #2c58e7;
   color: aliceblue;
   margin: 0;
+  margin-top: 1rem;
 }
 
 .management-form button{
@@ -485,7 +491,7 @@ border-radius: 0;
   margin-top: .5rem;
 }
 
-.login-form p{
+.login-form p, .login-form span{
   margin-top: 20px;
   text-align: center;
   color: aliceblue;
@@ -505,10 +511,23 @@ border-radius: 0;
 .management{
   margin-bottom: 2rem;
 }
-.management a{
+.management a, .management p{
   display: block;
   margin: 2rem 1rem 1rem 2rem;  
   font-size: 1.2rem;
+}
+
+.management h2, .management h3{
+  display: block;
+  margin: 2rem 1rem 1rem 1rem;
+  font-size: 1.5rem;  
+}
+
+footer a, footer p {
+  margin: auto;
+  color: aliceblue;
+  font-size: 1.2rem;
+ 
 }
 
 /* Mobile View ***************/

@@ -4,18 +4,19 @@ const invController = require('../controllers/invController');
 const utilities = require('../utilities/');
 const invValidate = require('../utilities/inventory-validation')
 
-router.get('/', utilities.handleErrors(invController.getInventory));
+// Route to build inventory 
+router.get("/", utilities.checkAuthorization, utilities.handleErrors(invController.buildManagement))
 router.get('/type/:classificationId', utilities.handleErrors(invController.buildByClassificationId));
 router.get('/detail/:invId', utilities.handleErrors(invController.buildByInvId));
 router.get('/detail/', utilities.handleErrors(invController.buildByInvId));
 // Build Classification
-router.get("/add-classification/", utilities.handleErrors(invController.buildAddClassification))
-router.get("/add-inventory/", utilities.handleErrors(invController.buildAddInventory))
+router.get("/add-classification/", utilities.checkAuthorization.handleErrors(invController.buildAddClassification))
+router.get("/add-inventory/", utilities.checkAuthorization.handleErrors(invController.buildAddInventory))
 
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 // Edit Inventory Route
-router.get("/edit/:invId", utilities.handleErrors(invController.editInventoryView))
-router.get("/delete/:invId", utilities.handleErrors(invController.deleteView))
+router.get("/edit/:invId", utilities.checkAuthorization.handleErrors(invController.editInventoryView))
+router.get("/delete/:invId", utilities.checkAuthorization.handleErrors(invController.deleteView))
 
 // Process the classification data
 router.post(

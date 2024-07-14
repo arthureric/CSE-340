@@ -13,8 +13,8 @@ const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities/index")
-const errorRoute = require("./routes/errorRoute")
-const errorHandler = require("./routes/errorRoute")
+// const errorRoute = require("./routes/errorRoute")
+// const errorHandler = require("./routes/errorRoute")
 const session = require("express-session")
 const pool = require('./database/')
 const accountRoute =("./routes/accountRoute")
@@ -41,6 +41,12 @@ app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
+
+//middleware to get user information
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  next();
+});
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
