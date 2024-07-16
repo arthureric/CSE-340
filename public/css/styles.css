@@ -224,7 +224,7 @@
 .form-group select {
   width: 100%;
   padding: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #864545;
   border-radius: 3px;
   box-sizing: border-box;
 }
@@ -253,12 +253,21 @@
   background-repeat: no-repeat;
 }
 
+.formContainer {
+  margin: 0 auto;
+  padding: 10px;
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  text-align: center;
+  font-size: .85rem;
+}
+
 .form-button {
   width: 50%;
   padding: 5px;
   margin-top: 10px;
-  background-color: #c5c5c5;
-  color: rgb(219, 152, 152);
+  background-color: #333596;
+  color: rgb(231, 231, 231);
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
@@ -480,6 +489,13 @@ border-radius: 0;
 }
 
 .account-form button{
+  background-color: #2c58e7;
+  color: aliceblue;
+  margin: 0;
+  margin-top: 1rem;
+}
+
+.registerForm{
   background-color: #2c58e7;
   color: aliceblue;
   margin: 0;
