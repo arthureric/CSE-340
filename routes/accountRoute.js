@@ -18,11 +18,11 @@ router.get("/", Util.checkLogin, Util.handleErrors(accountController.buildManage
 router.get('/logout', Util.handleErrors(accountController.accountLogout))
 router.get("/update", Util.checkLogin, Util.handleErrors(accountController.buildAccountManagement))
 
-// // Deliver Edit Account View
-router.get(
-  "/logout",
-  Util.handleErrors(accountController.logoutAccount),
-)
+// // // Deliver Edit Account View
+// router.get(
+//   "/logout",
+//   Util.handleErrors(accountController.logoutAccount),
+// )
 
 // // Deliver Register View
 // router.get("/register", accountController.buildRegister);
@@ -41,28 +41,26 @@ router.post(
 
 // Process the login attempt
 router.post(
-  "/login",
+  "/",
   regValidate.LoginRules(),
   regValidate.checkLoginData,
-  (req, res) => {
-    res.status(200).send('login process')
-  }
+  Util.handleErrors(accountController.accountLogin)
 )
 
 // // Process the update account data
-// router.post(
-//   "/updateAccount",
-//   regValidate.updateAccountRules(),
-//   regValidate.checkUpdateAccountData,
-//   Util.handleErrors(accountController.updateAccount)
-// )
+router.post(
+  "/updateAccount",
+  regValidate.updateAccountRules(),
+  regValidate.checkUpdateAccountData,
+  Util.handleErrors(accountController.updateAccount)
+)
 
 // // Process the update account data
-// router.post(
-//   "/updatePassword",
-//   regValidate.updatePasswordRules(),
-//   regValidate.checkUpdatePasswordData,
-//   Util.handleErrors(accountController.updatePassword)
-// )
+router.post(
+  "/updatePassword",
+  regValidate.updatePasswordRules(),
+  regValidate.checkUpdatePasswordData,
+  Util.handleErrors(accountController.updatePassword)
+)
 
 module.exports = router; // exports the router objects to be used elsewhere in the project.

@@ -1,12 +1,7 @@
-const errorController = {};
-
-// Controller function for an intentional error
-errorController.startError = (req, res, next) => {
-    try {
-        nonExistentFunction();
-    } catch (error) {
-        next(error);
-    }
-};
-
-module.exports = errorController;
+async function buildError(req, res, next) {
+    let nav = await utilities.getNav()
+    res.render("errors/error", {
+      title: "Login",
+      nav,
+    })
+  }

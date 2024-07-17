@@ -85,6 +85,7 @@ app.use(async (req, res, next) => {
 *************************/
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
+  // let tools = await utilities.getTools(req);
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
   console.error(err.stack); // Print debugging trace for stack
   let message = '';

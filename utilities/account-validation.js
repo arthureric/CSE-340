@@ -114,9 +114,11 @@ validate.checkRegData = async (req, res, next) => {
       errors = validationResult(req)
       if (!errors.isEmpty()) {
         let nav = await utilities.getNav()
+        let tools = utilities.getTools(req);
         res.render("account/login", {
           errors,
           title: "Login",
+          tools,
           nav,
           account_email,
         })
@@ -214,15 +216,20 @@ validate.checkRegData = async (req, res, next) => {
       errors = validationResult(req)
       if (!errors.isEmpty()) {
         let nav = await utilities.getNav()
+        let tools = utilities.getTools(req);
         res.render("account/update", {
           errors,
           title: "Edit Account",
-          nav
-        })
-        return
-      }
-      next()
-    }
+          tools,
+          nav,
+          account_firstname,
+          account_lastname,
+          account_email
+      });
+      return
+  }
+  next();
+}
     
   
     module.exports = validate;

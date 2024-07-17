@@ -67,25 +67,23 @@ invCont.buildAddInventory = async function (req, res, next) {
 /* ****************************************
 *  Process Classification
 * *************************************** */
-invCont.manageClassification = async function (req, res) {
+invCont.addClassification = async function (req, res, next){
+  let nav = await utilities.getNav()
   const { classification_name } = req.body
-  const managementResult = await invModel.addClassification(
+
+  const addClassificationResult = await invModel.addClassification(
    classification_name
   )
-  let nav = await utilities.getNav()
-  const clasificationSelect = await utilities.buildClassificationList()
 
-  if (managementResult) {
+  if (addClassificationResult) {
     req.flash(
       "notice",
-      `The newcar classification was succesfully aded.`
-    )
-    res.status(201).render("./inventory/management", {
-      title: "Vehicle Management",
+      `The newcar classification ${classification_name} was succesfully aded.`)
+    res.status(201).render("./inventory/add-classification", {
+      title: "Add new Vehicle Classification",
       nav,
-      errors: null,
-      clasificationSelect
-    });
+    
+    })
   } else {
     req.flash("notice", "Provide a correct clasification name.")
     res.status(501).render("./inventory/add-classification", {

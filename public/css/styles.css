@@ -58,6 +58,13 @@
     max-width: 100%;
   }
 
+  nav li a{
+    margin: 0 10px;
+    text-decoration: none;
+    color: aliceblue;
+    font-size: 1.2rem;
+  }
+
   nav ul li {
     display: flex;
     flex: 1 1 100%;
@@ -409,16 +416,19 @@
 }
 
 .login-form, .account-form, .management-form {
-  background-color: #25BDDC;
-  padding: 20px;  
-  margin: 1rem; 
-  border: #2c3e50 1px solid;
+  background-color: #62bfd1;
+  max-width: 350px;
+  padding: 10px;  
+  margin: 0 auto; 
+  border: #259986 1px solid;
+  text-align: center;
+  font-size: .85rem;
 }
 .login-form fieldset, .account-form fieldset, .management-form fieldset {
-  width: 40%;  
-  background-color: #2c3e50;
+  width: 100%;  
+  background-color: #1c4f81;
   padding: 20px;
-  border: 2px solid #767779;
+  border: 2px solid #5d9b2a;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -432,7 +442,7 @@ border-radius: 0;
   display: block;
   margin-bottom: 15px;
   color: aliceblue;
-  font-size: 1.3rem;
+  font-size: .85rem;
 }
 
 .account-label{
@@ -443,7 +453,7 @@ border-radius: 0;
   width: 100%;
   padding: 10px;
   margin-top: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #7c5a5a;
   border-radius: 4px;
   box-sizing: border-box;
 }
@@ -453,11 +463,11 @@ border-radius: 0;
 }
 
 .management-form input:valid, .management-form textarea:valid, .management-form select:valid {
-  background-color: lightgreen;
+  background-color: rgb(30, 134, 30);
 }
 
 .management-form input:invalid, .management-form textarea:invalid, .management-form select:invalid {
-  background-color: lightcoral;
+  background-color: rgb(202, 55, 55);
 }
 
 #classificationList {
@@ -466,7 +476,7 @@ border-radius: 0;
 }
 
 .account-label input{
-  border: 1px solid #2c3e50;
+  border: 1px solid #5284b6;
   border-radius: 0;
 }
 
