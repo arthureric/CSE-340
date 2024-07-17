@@ -551,9 +551,13 @@ border-radius: 0;
 
 footer a, footer p {
   margin: auto;
-  color: aliceblue;
+  color: rgb(241, 245, 245);
   font-size: 1.2rem;
- 
+  background-color: #252020;
+  padding: 1rem;
+  display: grid;
+  place-items: center;
+  position: relative;
 }
 
 /* Mobile View ***************/
