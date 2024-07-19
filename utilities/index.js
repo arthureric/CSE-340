@@ -195,9 +195,9 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
-/**************
+/****************************
  * Build header Login/Logout
- *************/
+ ***************************/
 Util.getTools = (req) =>{
   if(req.cookies.jwt){
       try{
@@ -220,25 +220,25 @@ Util.getTools = (req) =>{
 /**************
 * Authorization only to Employee and Admin accounts
 *************/
-Util.authorizedAccounts = (req, res, next) =>{
-  if(req.cookies.jwt){
-      try{
-          const cookieData = jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET);
-          if (cookieData.account_type == "Employee" || cookieData.account_type == "Admin"){
-              next();
-          }
-          else{
-              req.flash("notice", "Forbidden access");
-              res.status(401).redirect("/account/login");
-          }
-      }
-      catch (error){
-          throw new Error (error);
-      }
-  }
-  else{
-      res.status(401).redirect("/account/login");
-  }
-}
+// Util.authorizedAccounts = (req, res, next) =>{
+//   if(req.cookies.jwt){
+//       try{
+//           const cookieData = jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET);
+//           if (cookieData.account_type == "Employee" || cookieData.account_type == "Admin"){
+//               next();
+//           }
+//           else{
+//               req.flash("notice", "Forbidden access");
+//               res.status(401).redirect("/account/login");
+//           }
+//       }
+//       catch (error){
+//           throw new Error (error);
+//       }
+//   }
+//   else{
+//       res.status(401).redirect("/account/login");
+//   }
+// }
 
 module.exports = Util;

@@ -7,7 +7,7 @@ const { body, validationResult } = require("express-validator")
  /*  **********************************
   *  Registration Data Validation Rules
   * ********************************* */
- validate.registationRules = () => {
+ validate.registrationRules = () => {
   return [
     // firstname is required and must be string
     body("account_firstname")
@@ -109,7 +109,7 @@ validate.checkRegData = async (req, res, next) => {
    * Check data and return errors or continue to log in
    * ***************************** */
   validate.checkLoginData = async (req, res, next) => {
-      const { account_email } = req.body
+      const { account_email, account_password, } = req.body
       let errors = []
       errors = validationResult(req)
       if (!errors.isEmpty()) {
@@ -121,6 +121,7 @@ validate.checkRegData = async (req, res, next) => {
           tools,
           nav,
           account_email,
+          account_password,
         })
         return
       }
@@ -232,4 +233,4 @@ validate.checkRegData = async (req, res, next) => {
 }
     
   
-    module.exports = validate;
+module.exports = validate;
