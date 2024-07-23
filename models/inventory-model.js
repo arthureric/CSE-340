@@ -149,4 +149,37 @@ async function deleteInventoryItem(inv_id) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getVehicleDetails, addClassification, checkExistingClassification, addNewVehicle, updateInventory, deleteInventoryItem};
+  /* ******************************
+  * Add New Review Information
+  ***************************** */
+// Define an asynchronous function to add review data to the database
+async function addReviewData (
+  review_id, 
+  review_text,
+  inv_id,
+  account_id
+) {
+  try {
+    // Define the SQL query to insert a new review into the database
+    const sql = `INSERT INTO public.review
+    (review_id, review_text, inv_id, account_id) 
+    VALUES ($1, $2, $3, $4) RETURNING *`;
+
+    // Execute the SQL query using the provided parameters
+    const data = await pool.query(sql, [
+      review_id,
+      review_text,
+      inv_id,
+      account_id
+    ]);
+
+    // Return the inserted rows
+    return data.rows;
+  } catch (error) {
+    // If an error occurs, return the error message
+    return error.message;
+  }
+}
+
+
+module.exports = {getClassifications, getInventoryByClassificationId, getVehicleDetails, addClassification, checkExistingClassification, addNewVehicle, updateInventory, deleteInventoryItem, addReviewData};

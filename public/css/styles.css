@@ -560,6 +560,10 @@ footer a, footer p {
   position: relative;
 }
 
+.notice {
+  color: rgb(219, 10, 10);
+}
+
 /* Mobile View ***************/
 #menu {
   display: block;

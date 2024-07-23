@@ -1,6 +1,7 @@
 // Import necessary modules
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
+const pool = require("../database/")
 
 const invCont = {}
 
@@ -307,5 +308,64 @@ invCont.deleteItem = async function (req, res, next) {
     next(error)
   }
 }
+
+// Define an asynchronous function to handle the review process
+invCont.review = async function (req, res, next) {
+  // Fetch the navigation data
+  let nav = await utilities.getNav();
+
+  // Destructure the request body to get the review details
+  const { 
+    review_id,
+    review_text, 
+    inv_id, 
+    account_id
+  } = req.body;
+
+  // Add the review data to the inventory model
+  const addResult = await invModel.addReviewData(
+    review_id,
+    review_text,
+    inv_id,
+    account_id
+  );
+
+  // Fetch the inventory data for the given item ID
+  const invData = await invModel.getItemById(inv_id);
+
+  // Build the item detail view
+  const detailView = await utilities.buildItemGrid(invData[0]);
+
+  // Add the new review to the detail view
+  const addNewReview = await utilities.addNewReview(detailView, res);
+
+  // Extract the year, make, and model of the item
+  const itemYear = invData[0].inv_year;
+  const itemMake = invData[0].inv_make;
+  const itemModel = invData[0].inv_model;
+
+  // Combine year, make, and model to form the item name
+  const name = itemYear + itemMake + itemModel;
+
+  // If the review was successfully added, flash a success message and render the detail view
+  if (addResult) {
+    req.flash(
+      "notice",
+      "New Review Added"
+    );
+    res.status(201).render("inventory/detail", {
+      title: name,
+      nav,
+      detailView,
+      inv_id,
+      addNewReview,
+      errors: null
+    });
+  } else {
+    // If the review addition failed, flash an error message and render the edit inventory view
+    req.flash("notice", "Sorry, the insert failed.");
+    return res.status(501).render("inventory/edit-inventory");
+  }
+};
 
 module.exports = invCont

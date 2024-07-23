@@ -217,28 +217,44 @@ Util.getTools = (req) =>{
   }
 }
 
-/**************
-* Authorization only to Employee and Admin accounts
-*************/
-// Util.authorizedAccounts = (req, res, next) =>{
-//   if(req.cookies.jwt){
-//       try{
-//           const cookieData = jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET);
-//           if (cookieData.account_type == "Employee" || cookieData.account_type == "Admin"){
-//               next();
-//           }
-//           else{
-//               req.flash("notice", "Forbidden access");
-//               res.status(401).redirect("/account/login");
-//           }
-//       }
-//       catch (error){
-//           throw new Error (error);
-//       }
-//   }
-//   else{
-//       res.status(401).redirect("/account/login");
-//   }
-// }
+/* **************************************
+* Build The New Review Display
+* ************************************ */
+// Define an asynchronous function to build the HTML structure for displaying reviews
+Util.addNewReview = async function(data) {
+  let review;
+
+  // Check if there are any reviews in the data
+  if (data.length > 0) {
+    // Start building the review HTML structure
+    review = '<div id="item-display">';
+
+    // Iterate over each review item
+    data.forEach(item => {
+      // Append each review's details to the review HTML structure
+      review += `<div id="description">
+        <div class="vertical-line"></div>
+        <div id="item-description">
+          <h1>Customer Reviews</h1>
+          <h2>${item.review_id}</h2>
+          <p>${new Intl.DateTimeFormat('en-US').format(new Date(item.review_date))}</p>
+          <p>${item.review_text}</p>
+        </div>
+      </div>`;
+    });
+
+    // Close the review HTML structure
+    review += '</div>';
+  } else {
+    // If there are no reviews, display a notice
+    review = '<p class="notice"> Sorry, there are no reviews.</p>';
+  }
+
+  // Log the review HTML structure to the console for debugging purposes
+  console.log(review);
+
+  // Return the review HTML structure
+  return review;
+}
 
 module.exports = Util;
